@@ -29,11 +29,11 @@ namespace triangleCheck
             }
             else
             {
-                double abLength = GetLength(xB, xA, yB, yA);
+                double abLength = Sqrt(xB, xA, yB, yA);
                 Console.WriteLine($"Длина стороны AB: {abLength}");
-                double bcLength = GetLength(xC, xB, yC, yB);
+                double bcLength = Sqrt(xC, xB, yC, yB);
                 Console.WriteLine($"Длина стороны BC: {bcLength}");
-                double caLength = GetLength(xA, xC, yA, yC);
+                double caLength = Sqrt(xA, xC, yA, yC);
                 Console.WriteLine($"Длина стороны CA: {caLength}");
                 if ((abLength == bcLength) || (bcLength == caLength) || (abLength == caLength))
                 {
@@ -43,7 +43,11 @@ namespace triangleCheck
                 {
                     Console.WriteLine("Треугольник не равнобедренный");
                 }
-                if ((abLength == bcLength) && (bcLength == caLength))
+                double differenceSidesFirst = (abLength - bcLength);
+                double differenceSidesSecond = (bcLength - caLength);
+                double differenceSidesThird = (caLength - abLength);
+                double alpha = 0.2;
+                if ((differenceSidesFirst <= alpha) && (differenceSidesSecond <= alpha) && (differenceSidesThird <= alpha))
                 {
 
                     Console.WriteLine("Треугольник равносторонний");
@@ -83,7 +87,7 @@ namespace triangleCheck
                 { Console.WriteLine(i); }
             }
         }
-        private static double GetLength(double point1, double point2, double point3, double point4)
+        private static double Sqrt(double point1, double point2, double point3, double point4)
         {
             return Math.Sqrt(Math.Pow((point1 - point2), 2) + Math.Pow((point3 - point4), 2));
         }
